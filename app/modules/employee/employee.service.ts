@@ -15,7 +15,7 @@ const createEmployee = async (employee: IEmployee) => {
         const result = await employeeRepo.create(employeeData);
         sgMail.setApiKey(process.env.SENDGRID_API_KEY!)
         const msg = {
-            from: "soham.munot@coditas.com",
+            from: "sohammunot2@gmail.com",
             to: employeeData.email,
             subject: 'Account Sucessfully Created',
             text: `Dear,${employeeData.name}. Your Account has been created here are the login credentials. EmployeeId: ${employeeData.employeeId} Password:${password}`
