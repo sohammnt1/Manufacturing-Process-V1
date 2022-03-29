@@ -35,8 +35,9 @@ const authenticateEmployee = async (employeeId: string, password: string) => {
         if (!employee) throw new Error('Employee doesn\'t exists');
         const doMatch = await compare(password, employee.password);
         if (!doMatch) throw new Error('Invalid Password');
-        const result = generateToken(employee);
-        return result;
+        const token = generateToken(employee);
+        const role =  employee.role
+        return {token,role};
     } catch (error) {
         throw error;
     }

@@ -34,6 +34,8 @@ router.post('/login', LoginEmployeeValidator, async (
     try {
         let { employeeId, password } = req.body;
         const result = await employeeService.authenticateEmployee(employeeId, password);
+        // const role = res.locals.user.role
+        // console.log(role)
         res.send(new ResponseHandler(result));
     } catch (error) {
         next(error);
