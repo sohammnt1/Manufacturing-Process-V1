@@ -79,6 +79,13 @@ const assignfurnaceOperator = (updated_data: any) => purchaseOrderModel.updateOn
     }
 )
 
+const checkIfNotManufactured = (purchaseOrderId:string) => purchaseOrderModel.aggregate(
+    [
+        { $unwind: "$product" },
+        { $match: { $and: [{ status: "PreProduction" }, { "product.manufactured": false },{_id:new ObjectId(purchaseOrderId)}] } }
+    ]
+)
+
 const updateStatus = (purchaseOrderId : any, status : string) => purchaseOrderModel.updateOne(
     { _id:new ObjectId(purchaseOrderId) },
     { 
@@ -143,5 +150,6 @@ export default {
     assignDeliveryExecutive,
     assignAccountant,
     getTotalAmountbyStatus,
-    getPurchaseOrderById
+    getPurchaseOrderById,
+    checkIfNotManufactured
 }

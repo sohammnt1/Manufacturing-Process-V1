@@ -83,10 +83,26 @@ const editProduct = async (updated_data: any) => {
     }
 }
 
+const checkIfNotManufactured = async (purchaseOrderId:string) => {
+    try {
+        const result = await purchaseOrderRepo.checkIfNotManufactured(purchaseOrderId);
+        return result;
+    } catch (error) {
+        throw error;
+    }
+}
+
 const updateStatus = async (purchaseOrderId:any,status:string) => {
     try {
-        const result = await purchaseOrderRepo.updateStatus(purchaseOrderId,status);
-        return result;
+        const notManufactured = await checkIfNotManufactured(purchaseOrderId);
+        //console.log(notManufactured)
+        if(notManufactured.length===0){
+            const result = await purchaseOrderRepo.updateStatus(purchaseOrderId,status);
+            return result;
+        }
+        else{
+            throw "All Products are not manufactured "
+        }
     } catch (error) {
         throw error;
     }
