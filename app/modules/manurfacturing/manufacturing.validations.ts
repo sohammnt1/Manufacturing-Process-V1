@@ -1,9 +1,21 @@
 import { body } from "express-validator";
 import validate from "../../utility/validate";
 
-export const CreatePurchaseOrderValidator = [
-    body("customer_id").isString().withMessage("Enter a name"),
-    body("product").isArray().withMessage("Enter a valid email."),
-    body("address").isString().withMessage("Enter a valid Department"),
-    validate
+export const UpdateManufacturingValidator = [
+  body("postMachiningWeight")
+    .isString()
+    .withMessage("Enter a postMachiningWeight"),
+  body("furnaceId").isString().withMessage("Enter a valid furnaceId."),
+  body("productId").isString().withMessage("Enter a valid productId"),
+  body("purchaseOrderId")
+    .isString()
+    .withMessage("Enter a valid purchaseOrderId"),
+  validate,
+];
+
+export const UpdatePOStatusValidator = [
+  body("purchaseOrderId")
+    .isString()
+    .withMessage("Enter a valid purchaseOrderId"),
+  validate,
 ];
