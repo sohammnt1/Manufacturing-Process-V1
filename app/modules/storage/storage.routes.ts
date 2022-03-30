@@ -81,7 +81,7 @@ router.delete(
   permit([employeeRoles.Admin, employeeRoles.Storage_Keeper]),
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { purchaseOrderId } = req.query;
+      const purchaseOrderId = req.query.purchaseOrderId as string;
       const result = await storageService.deleteStorage(purchaseOrderId);
       res.send(new ResponseHandler(result));
     } catch (error) {

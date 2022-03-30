@@ -1,5 +1,5 @@
 import { Router, Request, Response, NextFunction } from "express";
-import { CreateDeliveryValidator } from "./delivery.validations";
+import { UpdateDeliveryValidator } from "./delivery.validations";
 import deliveryService from "./delivery.service";
 import { ResponseHandler } from "../../utility/response";
 import { permit } from "../../utility/authorize";
@@ -29,6 +29,7 @@ router.get(
 
 router.put(
   "/attempt",
+  UpdateDeliveryValidator,
   permit([employeeRoles.Admin, employeeRoles.Delivery_Executive]),
   async (req: Request, res: Response, next: NextFunction) => {
     try {

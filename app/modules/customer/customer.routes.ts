@@ -32,8 +32,8 @@ router.get(
   permit([employeeRoles.Admin, employeeRoles.Sales_Manager]),
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const queryParam = req.query;
-      const result = await customerService.displayCustomers(queryParam);
+      const customerId = req.query.customerId as string;
+      const result = await customerService.displayCustomers(customerId || "");
       res.send(new ResponseHandler(result));
     } catch (error) {
       next(error);

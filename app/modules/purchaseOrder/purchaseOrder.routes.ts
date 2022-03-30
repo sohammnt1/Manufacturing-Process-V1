@@ -44,8 +44,10 @@ router.get(
   ]),
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { status } = req.query;
-      const result = await purchaseOrderService.displayPurchaseOrders(status);
+      const status = req.query.status as string;
+      const result = await purchaseOrderService.displayPurchaseOrders(
+        status || ""
+      );
       res.send(new ResponseHandler(result));
     } catch (error) {
       next(error);

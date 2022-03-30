@@ -6,54 +6,52 @@ import accountsService from "./accounts.service";
 
 const router = Router();
 
-router.get('/display',permit([employeeRoles.Admin,employeeRoles.Accountant]), async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
+router.get(
+  "/display",
+  permit([employeeRoles.Admin, employeeRoles.Accountant]),
+  async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const {status} = req.query;
-        const result = await accountsService.displayPurchaseOrders(status);
-        res.send(new ResponseHandler(result));
+      const status = req.query.status as string;
+      const result = await accountsService.displayPurchaseOrders(status || "");
+      res.send(new ResponseHandler(result));
     } catch (error) {
-        
-        next(error);
+      next(error);
     }
-});
+  }
+);
 
 //  EDIT USERS
-router.put('/edit',permit([employeeRoles.Admin,employeeRoles.Accountant]), async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
+router.put(
+  "/edit",
+  permit([employeeRoles.Admin, employeeRoles.Accountant]),
+  async (req: Request, res: Response, next: NextFunction) => {
     try {
-
-        let updated_data = req.body;
-        let Accountant
-        if(res.locals.user.role===employeeRoles.Accountant){
-            Accountant=res.locals.user._id
-        }
-        // let Accountant="623c8ea6dad08e323f52534f";
-        updated_data={Accountant,...updated_data}
-        const result = await accountsService.editEmployee(updated_data);
-        res.send(new ResponseHandler(result));
+      let updated_data = req.body;
+      let Accountant;
+      if (res.locals.user.role === employeeRoles.Accountant) {
+        Accountant = res.locals.user._id;
+      }
+      // let Accountant="623c8ea6dad08e323f52534f";
+      updated_data = { Accountant, ...updated_data };
+      const result = await accountsService.editStatus(updated_data);
+      res.send(new ResponseHandler(result));
     } catch (error) {
-        next(error);
+      next(error);
     }
-});
+  }
+);
 
-router.get('/amount',permit([employeeRoles.Admin,employeeRoles.Accountant]), async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
+router.get(
+  "/amount",
+  permit([employeeRoles.Admin, employeeRoles.Accountant]),
+  async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const result = await accountsService.getTotalAmountbyStatus();
-        res.send(new ResponseHandler(result));
+      const result = await accountsService.getTotalAmountbyStatus();
+      res.send(new ResponseHandler(result));
     } catch (error) {
-        next(error);
+      next(error);
     }
-});
+  }
+);
 
 export default router;

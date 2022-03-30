@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
 
-let populatedVariableArray: any[] = [
+let populatedVariableArray: object[] = [
   [
     { name: "Admin", _id: new ObjectId("623945ae147217c8959381bc") },
     {
@@ -154,7 +154,6 @@ export const employeeRoles = convertArrayToObject(
   populatedVariableArray[0],
   "name"
 );
-console.log(employeeRoles);
 export const furnaces = convertArrayToObject(populatedVariableArray[1], "name");
 export const productTypes = convertArrayToObject(
   populatedVariableArray[2],
