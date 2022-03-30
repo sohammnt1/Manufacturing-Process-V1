@@ -92,7 +92,7 @@ router.delete(
 
 // update PO to out for delivery and delete from storage and add
 router.post(
-  "/outForDelivery",
+  "/out-for-delivery",
   OutForDeliveryValidator,
   permit([employeeRoles.Admin, employeeRoles.Storage_Keeper]),
   async (req: Request, res: Response, next: NextFunction) => {

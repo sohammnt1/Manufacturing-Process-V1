@@ -26,7 +26,7 @@ router.get(
 
 // EDIT USERS
 router.put(
-  "/editproduct",
+  "/edit-product",
   UpdateManufacturingValidator,
   permit([employeeRoles.Admin, employeeRoles.Furnace_Operator]),
   async (req: Request, res: Response, next: NextFunction) => {
@@ -47,7 +47,7 @@ router.put(
 );
 
 router.put(
-  "/updatestatus",
+  "/update-status",
   UpdatePOStatusValidator,
   permit([employeeRoles.Admin, employeeRoles.Furnace_Operator]),
   async (req: Request, res: Response, next: NextFunction) => {
