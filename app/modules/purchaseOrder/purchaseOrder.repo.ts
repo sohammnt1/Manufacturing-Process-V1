@@ -5,7 +5,7 @@ import { Types } from "mongoose"
 
 const create = (purchaseOrder: IPurchaseOrder) => purchaseOrderModel.create(purchaseOrder);
 
-const getAll = () => purchaseOrderModel.find()
+const getAll = () => purchaseOrderModel.find().populate("assignedEmployee.Sales_Manager","name").populate("assignedEmployee.Furnace_Operator","name").populate("assignedEmployee.Storage_Keeper","name").populate("assignedEmployee.Delivery_Executive","name").populate("assignedEmployee.Accountant","name").populate("customer_id","name").populate("assignedEmployee.Sales_Manager","name").populate("product.furnaceId","name")
 
 const getOne = (purchaseOrderId: string) => purchaseOrderModel.findOne({ purchaseOrderId: new ObjectId(purchaseOrderId) })
 
@@ -14,7 +14,7 @@ const getbyStatus = (status: string) => purchaseOrderModel.find({
         { status: status },
         { deleted: false }
     ]
-});
+}).populate("assignedEmployee.Sales_Manager","name").populate("assignedEmployee.Furnace_Operator","name").populate("assignedEmployee.Storage_Keeper","name").populate("assignedEmployee.Delivery_Executive","name").populate("assignedEmployee.Accountant","name").populate("customer_id","name").populate("assignedEmployee.Sales_Manager","name").populate("product.furnaceId","name");
 
 const getPurchaseOrderById = (purchaseOrderId:any) => purchaseOrderModel.findOne(
     {_id:new ObjectId(purchaseOrderId)}

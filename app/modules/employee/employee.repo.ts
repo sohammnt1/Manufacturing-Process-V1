@@ -13,7 +13,7 @@ const getbyRole = (role: string) => employeeModel.find({
         { role : role},
         { deleted: false }
     ]
-});
+}).populate("role","name").populate("shift","name");
 
 const update = (updated_data: IEmployee) => employeeModel.updateOne({
     employeeId: updated_data.employeeId

@@ -28,7 +28,6 @@ router.post('/create', CreatePurchaseOrderValidator,permit([employeeRoles.Admin,
     }
 });
 
-// DISPLAY USERS BY ROLES
 router.get('/display', permit([employeeRoles.Admin,employeeRoles.Sales_Manager,employeeRoles.Storage_Keeper,employeeRoles.Accountant]),async (
     req: Request,
     res: Response,

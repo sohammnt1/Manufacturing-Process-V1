@@ -7,8 +7,8 @@ class employeeSchema extends Schema {
             email: { type: String, required: true,unique:true},
             password: { type: String, required: true },
             employeeId: { type: String, required: true },
-            role: { type: Types.ObjectId, required: true, ref: 'roles' },
-            shift: [{ type: Types.ObjectId, required: true, ref: 'shifts' }],
+            role: { type: Types.ObjectId, required: true, ref: 'employeerole' },
+            shift: [{ type: Types.ObjectId, required: true, ref: 'shift' }],
             deleted: { type: Boolean, required: true ,default:false },
         }, {
             timestamps: true,

@@ -10,7 +10,7 @@ const getOne = (storageId: string) => storageModel.findOne({ storageId: storageI
 
 const getByFilter = (filterQuery: any) => storageModel.find({
     $and: filterQuery
-});
+}).populate("storageRackIds","rackNumber");
 
 const update = (updated_data: IStorage) => storageModel.updateOne({
     _id : updated_data._id

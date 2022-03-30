@@ -13,7 +13,7 @@ class purchaseOrderSchema extends Schema {
                     postMachiningWeight:{type:Number,required:false},
                     material:{type:String,required:true},
                     manufactured:{type:Boolean,required:true,default:false},
-                    furnaceId :{type:Types.ObjectId,required:false},
+                    furnaceId :{type:Types.ObjectId,required:false,ref:"furnace"},
                     productTotal:{type:Number,required:false}
                 }
             ],
@@ -22,11 +22,11 @@ class purchaseOrderSchema extends Schema {
             gst: { type: Number, required: false },
             total: { type: Number, required: false },
             assignedEmployee:{
-                    Sales_Manager:{type: Types.ObjectId, required: false, ref:"employees"},
-                    Furnace_Operator:[{type:Types.ObjectId,required:false, ref:"employees"}],
-                    Storage_Keeper:{type:Types.ObjectId,required:false, ref:"employees"},
-                    Delivery_Executive:{type:Types.ObjectId,required:false, ref:"employees"},
-                    Accountant:{type:Types.ObjectId,required:false, ref:"employees"},
+                    Sales_Manager:{type: Types.ObjectId, required: false, ref:"employee"},
+                    Furnace_Operator:[{type:Types.ObjectId,required:false, ref:"employee"}],
+                    Storage_Keeper:{type:Types.ObjectId,required:false, ref:"employee"},
+                    Delivery_Executive:{type:Types.ObjectId,required:false, ref:"employee"},
+                    Accountant:{type:Types.ObjectId,required:false, ref:"employee"},
                 },
             status:{
                 type:String,
