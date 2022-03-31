@@ -4,7 +4,11 @@ import { ObjectId } from "mongodb";
 
 const create = (employee: IEmployee) => employeeModel.create(employee);
 
-const getAll = () => employeeModel.find({ deleted: false });
+const getAll = () =>
+  employeeModel
+    .find({ deleted: false })
+    .populate("role", "name")
+    .populate("shift", "name");
 
 const getOne = (employeeId: string) =>
   employeeModel.findOne({ employeeId: employeeId });
