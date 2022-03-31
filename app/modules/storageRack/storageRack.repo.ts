@@ -1,7 +1,7 @@
 import storageRackModel from "./storageRack.schema";
 
-const getAll = () => storageRackModel.find()
+const getAll = () => storageRackModel.find();
 
 export default {
-    getAll,
-}
+  getAll,
+};

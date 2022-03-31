@@ -43,7 +43,11 @@ const displayStorages = async (filter: any) => {
     if (filter.purchaseOrderId) {
       filterQuery.push({ purchaseOrderId: filter.purchaseOrderId });
     }
-    result = storageRepo.getByFilter(filterQuery);
+    if (filterQuery.length > 0) {
+      result = storageRepo.getByFilter(filterQuery);
+    } else {
+      result = storageRepo.getAll();
+    }
     return result;
   } catch (error) {
     throw error;
