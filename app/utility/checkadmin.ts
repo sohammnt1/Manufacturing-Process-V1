@@ -28,7 +28,7 @@ const adminUser = {
 
 export const checkAdmin = async () => {
   try {
-    const result = await employeeRepo.getbyRole(employeeRoles.Admin);
+    const result = await employeeRepo.getbyRole(employeeRoles.Admin, 1, 10000);
     if (result.length === 0) {
       const hashedPassword = await hash("admin", 12);
       adminUser.password = hashedPassword;

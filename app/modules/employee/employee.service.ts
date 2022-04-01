@@ -49,13 +49,17 @@ const authenticateEmployee = async (employeeId: string, password: string) => {
   }
 };
 
-const displayEmployees = async (role: string) => {
+const displayEmployees = async (
+  role: string,
+  page: number,
+  itemsPerPage: number
+) => {
   try {
     let result;
     if (role) {
-      result = employeeRepo.getbyRole(role.trim());
+      result = employeeRepo.getbyRole(role.trim(), page, itemsPerPage);
     } else {
-      result = employeeRepo.getAll();
+      result = employeeRepo.getAll(page, itemsPerPage);
     }
     return result;
   } catch (error) {

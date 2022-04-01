@@ -4,7 +4,11 @@ import { ObjectId } from "mongodb";
 
 const create = (customer: ICustomer) => customerModel.create(customer);
 
-const getAll = () => customerModel.find({ deleted: false });
+const getAll = (page: number, itemsPerPage: number) =>
+  customerModel
+    .find({ deleted: false })
+    .skip(page * itemsPerPage)
+    .limit(itemsPerPage);
 
 const getOne = (customerId: string) =>
   customerModel.findOne({ _id: new ObjectId(customerId) }, { deleted: false });

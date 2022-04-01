@@ -1,8 +1,16 @@
 import purchaseOrderService from "../purchaseOrder/purchaseOrder.service";
 
-const displayPurchaseOrders = async (status: string) => {
+const displayPurchaseOrders = async (
+  status: string,
+  page: number,
+  itemsPerPage: number
+) => {
   try {
-    let result = purchaseOrderService.displayPurchaseOrders(status.trim());
+    let result = purchaseOrderService.displayPurchaseOrders(
+      status.trim(),
+      page,
+      itemsPerPage
+    );
     return result;
   } catch (error) {
     throw error;

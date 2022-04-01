@@ -5,10 +5,14 @@ import purchaseOrderService from "../purchaseOrder/purchaseOrder.service";
 import customerService from "../customer/customer.service";
 import { IDelivery } from "../delivery/delivery.types";
 
-const displayPurchaseOrder = async () => {
+const displayPurchaseOrder = async (page: number, itemsPerPage: number) => {
   try {
     let status = "PostMachiningDone";
-    let result = await purchaseOrderService.displayPurchaseOrders(status);
+    let result = await purchaseOrderService.displayPurchaseOrders(
+      status,
+      page,
+      itemsPerPage
+    );
     return result;
   } catch (error) {
     throw error;
@@ -32,7 +36,11 @@ const createStorage = async (storage: IStorage, storageKeeper: string) => {
   }
 };
 
-const displayStorages = async (filter: any) => {
+const displayStorages = async (
+  filter: any,
+  page: number,
+  itemsPerPage: number
+) => {
   try {
     let filterQuery = [];
     let result;
@@ -44,9 +52,9 @@ const displayStorages = async (filter: any) => {
       filterQuery.push({ purchaseOrderId: filter.purchaseOrderId });
     }
     if (filterQuery.length > 0) {
-      result = storageRepo.getByFilter(filterQuery);
+      result = storageRepo.getByFilter(filterQuery, page, itemsPerPage);
     } else {
-      result = storageRepo.getAll();
+      result = storageRepo.getAll(page, itemsPerPage);
     }
     return result;
   } catch (error) {

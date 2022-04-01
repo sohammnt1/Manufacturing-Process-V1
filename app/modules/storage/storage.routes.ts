@@ -15,7 +15,12 @@ router.get(
   "/tobestored",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const result = await storageService.displayPurchaseOrder();
+      const page = req.query.page as string;
+      const itemsPerPage = req.query.itemsPerPage as string;
+      const result = await storageService.displayPurchaseOrder(
+        +page,
+        +itemsPerPage
+      );
       res.send(new ResponseHandler(result));
     } catch (error) {
       next(error);
@@ -51,7 +56,13 @@ router.get(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const filters = req.query;
-      const result = await storageService.displayStorages(filters);
+      const page = req.query.page as string;
+      const itemsPerPage = req.query.itemsPerPage as string;
+      const result = await storageService.displayStorages(
+        filters,
+        +page,
+        +itemsPerPage
+      );
       res.send(new ResponseHandler(result));
     } catch (error) {
       next(error);

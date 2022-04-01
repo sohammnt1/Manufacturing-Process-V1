@@ -6,7 +6,7 @@ import { Types } from "mongoose";
 const create = (purchaseOrder: IPurchaseOrder) =>
   purchaseOrderModel.create(purchaseOrder);
 
-const getAll = () =>
+const getAll = (page: number, itemsPerPage: number) =>
   purchaseOrderModel
     .find()
     .populate("assignedEmployee.Sales_Manager", "name")
@@ -16,14 +16,16 @@ const getAll = () =>
     .populate("assignedEmployee.Accountant", "name")
     .populate("customer_id", "name")
     .populate("assignedEmployee.Sales_Manager", "name")
-    .populate("product.furnaceId", "name");
+    .populate("product.furnaceId", "name")
+    .skip((page - 1) * itemsPerPage)
+    .limit(itemsPerPage);
 
 const getOne = (purchaseOrderId: string) =>
   purchaseOrderModel.findOne({
     purchaseOrderId: new ObjectId(purchaseOrderId),
   });
 
-const getbyStatus = (status: string) =>
+const getbyStatus = (status: string, page: number, itemsPerPage: number) =>
   purchaseOrderModel
     .find({
       $and: [{ status: status }, { deleted: false }],
@@ -35,7 +37,9 @@ const getbyStatus = (status: string) =>
     .populate("assignedEmployee.Accountant", "name")
     .populate("customer_id", "name")
     .populate("assignedEmployee.Sales_Manager", "name")
-    .populate("product.furnaceId", "name");
+    .populate("product.furnaceId", "name")
+    .skip((page - 1) * itemsPerPage)
+    .limit(itemsPerPage);
 
 const getPurchaseOrderById = (purchaseOrderId: string) =>
   purchaseOrderModel

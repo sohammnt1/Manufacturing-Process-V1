@@ -5,7 +5,10 @@ export const CreateCustomerValidator = [
   body("name").isString().withMessage("Enter a name"),
   body("email").isEmail().withMessage("Enter a valid email."),
   body("address").isString().withMessage("Enter a valid address"),
-  body("contact").isNumeric().withMessage("Enter a valid contact number"),
+  body("contact")
+    .isNumeric()
+    .isLength({ min: 10, max: 13 })
+    .withMessage("Enter a valid contact number"),
   validate,
 ];
 

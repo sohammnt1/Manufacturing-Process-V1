@@ -4,22 +4,26 @@ import { ObjectId } from "mongodb";
 
 const create = (employee: IEmployee) => employeeModel.create(employee);
 
-const getAll = () =>
+const getAll = (page: number, itemsPerPage: number) =>
   employeeModel
     .find({ deleted: false })
     .populate("role", "name")
-    .populate("shift", "name");
+    .populate("shift", "name")
+    .skip((page - 1) * itemsPerPage)
+    .limit(itemsPerPage);
 
 const getOne = (employeeId: string) =>
   employeeModel.findOne({ employeeId: employeeId });
 
-const getbyRole = (role: string) =>
+const getbyRole = (role: string, page: number, itemsPerPage: number) =>
   employeeModel
     .find({
       $and: [{ role: role }, { deleted: false }],
     })
     .populate("role", "name")
-    .populate("shift", "name");
+    .populate("shift", "name")
+    .skip((page - 1) * itemsPerPage)
+    .limit(itemsPerPage);
 
 const update = (updated_data: IEmployee) =>
   employeeModel.updateOne(

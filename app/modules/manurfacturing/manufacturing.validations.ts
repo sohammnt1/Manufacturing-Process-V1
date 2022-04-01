@@ -3,7 +3,7 @@ import validate from "../../utility/validate";
 
 export const UpdateManufacturingValidator = [
   body("postMachiningWeight")
-    .isString()
+    .isFloat({ min: 0, max: 1000000 })
     .withMessage("Enter a postMachiningWeight"),
   body("furnaceId").isString().withMessage("Enter a valid furnaceId."),
   body("productId").isString().withMessage("Enter a valid productId"),

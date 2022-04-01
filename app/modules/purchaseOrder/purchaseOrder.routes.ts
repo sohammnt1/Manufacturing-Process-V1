@@ -45,9 +45,14 @@ router.get(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const status = req.query.status as string;
+      const page = req.query.page as string;
+      const itemsPerPage = req.query.itemsPerPage as string;
       const result = await purchaseOrderService.displayPurchaseOrders(
-        status || ""
+        status || "",
+        +page,
+        +itemsPerPage
       );
+
       res.send(new ResponseHandler(result));
     } catch (error) {
       next(error);

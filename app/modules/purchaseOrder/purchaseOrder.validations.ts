@@ -9,8 +9,12 @@ export const CreatePurchaseOrderValidator = [
   body("product.*.dimensions")
     .isString()
     .withMessage("Enter a valid dimensions."),
-  body("product.*.quantity").isNumeric().withMessage("Enter a valid quantity."),
-  body("product.*.price").isNumeric().withMessage("Enter a valid price."),
+  body("product.*.quantity")
+    .isFloat({ min: 1, max: 9999999999 })
+    .withMessage("Enter a valid quantity."),
+  body("product.*.price")
+    .isFloat({ min: 1, max: 9999999999 })
+    .withMessage("Enter a valid price."),
   body("product.*.material").isString().withMessage("Enter a valid material."),
   body("address").isString().withMessage("Enter a valid Department"),
   validate,

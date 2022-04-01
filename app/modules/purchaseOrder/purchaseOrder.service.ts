@@ -23,13 +23,17 @@ const createPurchaseOrder = async (purchaseOrder: IPurchaseOrder) => {
   }
 };
 
-const displayPurchaseOrders = async (status: string) => {
+const displayPurchaseOrders = async (
+  status: string,
+  page: number,
+  itemsPerPage: number
+) => {
   try {
     let result;
     if (status) {
-      result = purchaseOrderRepo.getbyStatus(status.trim());
+      result = purchaseOrderRepo.getbyStatus(status.trim(), page, itemsPerPage);
     } else {
-      result = purchaseOrderRepo.getAll();
+      result = purchaseOrderRepo.getAll(page, itemsPerPage);
     }
     return result;
   } catch (error) {

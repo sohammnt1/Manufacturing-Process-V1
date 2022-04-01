@@ -11,13 +11,22 @@ const createCustomer = async (customer: ICustomer) => {
   }
 };
 
-const displayCustomers = async (customerId: string) => {
+const displayCustomers = async (
+  customerId: string,
+  page: number,
+  itemsPerPage: number
+) => {
   try {
     let result;
     if (customerId) {
       result = customerRepo.getOne(customerId);
     } else {
-      result = customerRepo.getAll();
+      console.log(itemsPerPage);
+
+      console.log(page);
+      page = page - 1;
+      console.log(page);
+      result = customerRepo.getAll(page, itemsPerPage);
     }
     return result;
   } catch (error) {

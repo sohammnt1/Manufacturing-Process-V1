@@ -3,7 +3,6 @@ import manufacturingService from "./manufacturing.service";
 import { ResponseHandler } from "../../utility/response";
 import { permit } from "../../utility/authorize";
 import { employeeRoles } from "../../utility/db_constants";
-import { ObjectId } from "mongodb";
 import {
   UpdateManufacturingValidator,
   UpdatePOStatusValidator,

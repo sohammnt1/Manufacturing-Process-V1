@@ -33,7 +33,13 @@ router.get(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const customerId = req.query.customerId as string;
-      const result = await customerService.displayCustomers(customerId || "");
+      const page = req.query.page as string;
+      const itemsPerPage = req.query.itemsPerPage as string;
+      const result = await customerService.displayCustomers(
+        customerId || "",
+        +page,
+        +itemsPerPage
+      );
       res.send(new ResponseHandler(result));
     } catch (error) {
       next(error);

@@ -6,17 +6,24 @@ import { Types } from "mongoose";
 const create = (purchaseOrder: IPurchaseOrder) =>
   purchaseOrderModel.create(purchaseOrder);
 
-const getAll = () => purchaseOrderModel.find();
+const getAll = (page: number, itemsPerPage: number) =>
+  purchaseOrderModel
+    .find()
+    .skip((page - 1) * itemsPerPage)
+    .limit(itemsPerPage);
 
 const getOne = (purchaseOrderId: string) =>
   purchaseOrderModel.findOne({
     purchaseOrderId: new ObjectId(purchaseOrderId),
   });
 
-const getbyStatus = (status: string) =>
-  purchaseOrderModel.find({
-    $and: [{ status: status }, { deleted: false }],
-  });
+const getbyStatus = (status: string, page: number, itemsPerPage: number) =>
+  purchaseOrderModel
+    .find({
+      $and: [{ status: status }, { deleted: false }],
+    })
+    .skip((page - 1) * itemsPerPage)
+    .limit(itemsPerPage);
 
 const update = (updated_data: IPurchaseOrder) =>
   purchaseOrderModel.updateOne(
